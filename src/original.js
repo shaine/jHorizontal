@@ -16,8 +16,6 @@ var max_left = 0;
 // After EVERYTHING has loaded,
 // run some size calculations
 $(window).load(function() {
-  $('.col').hide();
-  
   if($('.col.fixed').length) {
     var fixed = $('.col.fixed');
     
@@ -33,16 +31,6 @@ $(window).load(function() {
     
     $('#scrollbar_inner').css('left', $('.col.fixed').width() + 1 + 'px');
   }
-  
-  <?php if($page->isRoot()): ?>
-    $('.col.image').children().hide();
-  <?php endif; ?>
-  
-  $('#fixed_col, .col').fadeIn(1500);
-  
-  <?php if($page->isRoot()): ?>
-    window.setTimeout(showRandomColumn, 500);
-  <?php endif; ?>
   
   // Establish the width of the open scroll area
   scrollable_width = $('#scrollbar_inner').width() - $('#scrollbar').width();
