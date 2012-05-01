@@ -7,27 +7,24 @@
  * Depends:
  *  jquery.ui.touch-punch.js
  */
-(function($) {
-  $.fn.jHorizontal = function(arg) {
-    if(methods[arg]) {
-      return methods[arg].apply(this, Array.prototype.slice.call(arguments, 1));
-    }
-    else if (typeof method === 'object' || ! method) {
-      return methods.init.apply(this, arguments);
-    }
-    else {
-      $.error('Method ' +  arg + ' does not exist in jHorizontal.');
-    }
+;(function($, doc, win) {
+  "use strict";
+
+  function jHorizontal(el, opts) {
+    this.$el  = $(el);
+    this.opts = opts;
+    this.init();
+  }
+
+  jHoriztonal.prototype.init = function() {
   };
-  
-  var methods = {
-    init : function(options) { 
-      return this.each(function(){
-        
-      });
-    }
+
+  $.fn.jhorizontal = function(opts) {
+    return this.each(function() {
+      new jHorizontal(this, opts);
+    });
   };
-})(jQuery);
+})(jQuery, document, window);)
 
 /*!
  * jQuery UI Touch Punch 0.1.0
