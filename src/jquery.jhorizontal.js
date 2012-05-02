@@ -10,13 +10,37 @@
 ;(function($, doc, win) {
   "use strict";
 
+  var name = 'jhorizontal';
+
   function jHorizontal(el, opts) {
     this.$el  = $(el);
-    this.opts = opts;
+
+    this.defaults = {
+      optionA: 'someOption',
+      optionB: 'someOtherOption'
+    };
+
+    // let's use our name variable here as well for our meta options
+   var meta = this.$el.data(name + '-opts');
+   this.opts = $.extend(this.defaults, opts, meta);
+
+   this.$el.data(name, this);
+
+    //this.$header = this.$el.find('.header');
+    //this.$body   = this.$el.find('.body');
+
     this.init();
   }
 
   jHoriztonal.prototype.init = function() {
+  };
+
+  jHoriztonal.prototype.destroy = function() {
+    this.$el.off('.' + name);
+    this.$el.find('*').off('.' + name);
+
+    this.$el.removeData(name);
+    this.$el = null;
   };
 
   $.fn.jhorizontal = function(opts) {
