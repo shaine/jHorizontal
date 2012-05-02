@@ -21,10 +21,17 @@
     };
 
     // let's use our name variable here as well for our meta options
-   var meta = this.$el.data(name + '-opts');
-   this.opts = $.extend(this.defaults, opts, meta);
+    var meta = this.$el.data(name + '-opts');
+    this.opts = $.extend(this.defaults, opts, meta);
 
-   this.$el.data(name, this);
+    // The width of the area the left point of the scrollbar can move in
+    var scrollable_width = 0;
+    // The width of the inner scrolling content
+    var inner_width = 0;
+    // The width of the area the left point of the scrolling content can move in
+    var max_left = 0;
+
+    this.$el.data(name, this);
 
     //this.$header = this.$el.find('.header');
     //this.$body   = this.$el.find('.body');
@@ -32,10 +39,10 @@
     this.init();
   }
 
-  jHoriztonal.prototype.init = function() {
+  jHorizontal.prototype.init = function() {
   };
 
-  jHoriztonal.prototype.destroy = function() {
+  jHorizontal.prototype.destroy = function() {
     this.$el.off('.' + name);
     this.$el.find('*').off('.' + name);
 
@@ -48,7 +55,7 @@
       new jHorizontal(this, opts);
     });
   };
-})(jQuery, document, window);)
+})(jQuery, document, window);
 
 /*!
  * jQuery UI Touch Punch 0.1.0
