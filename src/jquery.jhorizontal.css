@@ -5,7 +5,7 @@
   margin-bottom: 10px;
 }
 
-#slider_inner {
+.jHorizontal_slider_inner {
   height: 500px;
   width: auto;
   white-space: nowrap;
