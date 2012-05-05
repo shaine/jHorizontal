@@ -1,4 +1,4 @@
-#slider_outer {
+.jHorizontal_slider {
   overflow: hidden;
   height: 500px;
   position: relative;
@@ -13,7 +13,7 @@
   position: relative;
 }
 
-#slider_outer .col {
+.jHorizontal_slider .col {
   display: inline-block;
   zoom: 1;
   *display: inline;
@@ -26,26 +26,23 @@
   width: auto;
 }
 
-#slider_outer .col:last-child {
+.jHorizontal_slider .col:last-child {
   margin-right: 0;
 }
 
-#scrollbar_outer {
+.jHorizontal_scrollbar_outer {
   height: 13px;
   background-color: lightgrey;
   position: relative;
 }
 
-#scrollbar_inner {
-  position: absolute;
-  right: 0;
-  left: 0;
-}
-
-#scrollbar {
+.jHorizontal_scrollbar {
   width: 50px;
   height: 13px;
   background-color: darkgrey;
   cursor: ew-resize;
-  display: none;
+  display: block;
+  position: absolute;
+  right: 0;
+  left: 0;
 }
