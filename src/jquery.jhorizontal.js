@@ -21,7 +21,6 @@
 
     this.defaults = {
       scrollbar: null,
-      scrollbar_outer: null,
       change_hash: true,
       watch_hash: true
     };
@@ -47,16 +46,12 @@
     this.$scrollbar = $(this.opts.scrollbar);
     // If we have a scrollbar, find its outer element
     if(this.$scrollbar.length) {
-      if(this.opts.scrollbar_outer) {
-        this.$scrollbar_outer = $(this.opts.scrollbar_outer);
-      }
-      else {
-        this.$scrollbar.wrap('<div />');
-        this.$scrollbar_outer = this.$scrollbar.closest('div');
-      }
+      this.$scrollbar.wrap('<div />');
+      this.$scrollbar_outer = this.$scrollbar.parent();
     }
 
     // Setup classes for our els
+    this.$el.addClass(name + '_slider');
     this.$scrollbar.addClass(name + '_scrollbar');
     this.$scrollbar_outer.addClass(name + '_scrollbar_outer');
 
