@@ -113,8 +113,8 @@
     if(scrollto < 0) {
       scrollto = 0;
     }
-    else if(scrollto > max_left) {
-      scrollto = max_left;
+    else if(scrollto > this.max_left) {
+      scrollto = this.max_left;
     }
 
     // Scroll the content
@@ -133,16 +133,16 @@
    */
   function scrollTheBar(scrollto) {
     // Turn the pixel data into a percentage scrolled
-    var percent = scrollto / max_left;
+    var percent = scrollto / this.max_left;
 
     // Figure out where the scrollbar left needs to be
-    var scrollbar_left = Math.round(percent * scrollable_width);
+    var scrollbar_left = Math.round(percent * this.scrollable_width);
     if(scrollbar_left < 0) {
       scrollbar_left = 0;
     }
 
     // Move the bar
-    $('#scrollbar').css('left', scrollbar_left);
+    this.$scrollbar.css('left', scrollbar_left);
   }
 
   /**************************************
@@ -167,11 +167,6 @@
     // Get the offset of the section
     var scrollto = getSectionX(getSectionByHash(hash));
 
-    // If necessary, consider the offset of the left bar
-    if($('#fixed_col').length) {
-      scrollto -= $('#fixed_col').width();
-    }
-
     // Go!
     scrollTo(scrollto);
   }
@@ -185,17 +180,6 @@
     // Start off your mornings right with a clean hash
     hash = getSanitizedHash(hash);
     window.location.hash = hash;
-  }
-
-  /**
-   * Event listener for subnav clicks
-   */
-  function hashClick() {
-    var hash = $(this).attr('href');
-    hash = hash.substr(hash.indexOf('#'));
-
-    changeHash(hash);
-    scrollToHash(hash);
   }
 
   /**************************************
@@ -220,7 +204,7 @@
    * Get the current scroll position of the viewing area
    */
   function getCurrentX() {
-    return $('#slider_outer').scrollLeft();
+    return this.$el.scrollLeft();
   }
 
   /**
@@ -250,7 +234,7 @@
    * @param percent Float representing the percent the scrollbar has scrolled
    */
   function getPXFromPercentage(percent) {
-    return Math.round(percent * max_left);
+    return Math.round(percent * this.max_left);
   }
 
   /**
@@ -259,7 +243,7 @@
   function getCurrentPosition() {
     var pos = getCurrentX();
 
-    return pos + ($('#slider_outer').width());
+    return pos + this.$el.width();
   }
 
   /**
@@ -267,7 +251,7 @@
    */
   function getCurrentSection() {
     var current = null;
-    $('#slider_inner').children().each(function() {
+    this.$inner.children().each(function() {
       if($(this).position().left + $(this).outerWidth(true) > getCurrentPosition()) {
         current = $(this);
         return false;
@@ -333,7 +317,7 @@
 
     // Set to a comfortable speed
     normal = normal * -30;
-    var scrollto = $('#slider_outer').scrollLeft() + normal;
+    var scrollto = this.$el.scrollLeft() + normal;
 
     // Scroll!
     scrollTo(scrollto);
@@ -343,8 +327,8 @@
   }
 
   function scrollbarDrag() {
-    var left = parseInt($('#scrollbar').css('left').replace('px', ''));
-    var percent = left / scrollable_width;
+    var left = parseInt(this.$scrollbar.css('left').replace('px', ''));
+    var percent = left / this.scrollable_width;
     var scrollto = getPXFromPercentage(percent);
 
     scrollTo(scrollto);
